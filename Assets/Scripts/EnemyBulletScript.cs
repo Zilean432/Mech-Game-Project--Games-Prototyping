@@ -12,6 +12,7 @@ public class EnemyBulletScript : MonoBehaviour
     public float lifeTimerLimit;
     public GameObject hitParticle;
 
+    //This following section of the code gives the bullet it's movement, and makes it point in the direction of the player.
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -35,6 +36,7 @@ public class EnemyBulletScript : MonoBehaviour
         }
     }
 
+    //The following causes the bullet to deal damage to the player and then destroy itself upon contact with them or another object.
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Player")
@@ -43,6 +45,7 @@ public class EnemyBulletScript : MonoBehaviour
             Instantiate(hitParticle, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+        //The following serves to prevent bullets from destroying themselves if they collide with other bullets or enemies in the stage.
         else 
         {
             if (other.gameObject.tag != "Enemy" && other.gameObject.tag != "EnemyBullet")

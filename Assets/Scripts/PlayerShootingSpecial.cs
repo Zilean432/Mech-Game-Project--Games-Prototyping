@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FlyingPlayerShootingSpecial : MonoBehaviour
 {
+    //This script is a replica of the ordinary player shooting script, with the only difference being that it's firing button can be bound to a key on the keyboard rather than the mouse buttons.
     private Camera mainCam;
     private Vector3 mousePos;
     public GameObject bulletSpecial;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerShootingLeft : MonoBehaviour
 {
+    //This script is a replica of the right arm player shooting script, with the only difference being that it uses the right mouse button to shoot rather than the left one.
     private Camera mainCam;
     private Vector3 mousePos;
     public GameObject bulletLeft;

@@ -39,17 +39,19 @@ public class FlyingPlayerMovement : MonoBehaviour
 
     void Update()
     {
+        //This following line allows the player's energy value to be tracked as text on the UI.
         counterText.text = energy.ToString();
 
+        //The following allows the player to jump by pressing the space bar, provided they are touching the ground and not currently flying.
         if (Input.GetButtonDown("Jump") && isGrounded && !isFlying)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
 
+        //The following two 'if' statements allow the player to move left and right by using the corresponding keys.
         if (Input.GetKey(right))
         {
-            this.transform.Translate(new Vector3(moveSpeed, 0f, 0f)
-            * Time.deltaTime);
+            this.transform.Translate(new Vector3(moveSpeed, 0f, 0f) * Time.deltaTime);
         }
 
         if (Input.GetKey(left))
@@ -57,6 +59,7 @@ public class FlyingPlayerMovement : MonoBehaviour
             this.transform.Translate(new Vector3(moveSpeed * -1, 0f, 0f) * Time.deltaTime);
         }
 
+        //The following two 'if' statements allow the player to move freely upwards and downwards while they are flying, by pressing the corresponding keys.
         if (Input.GetKey(up) && isFlying == true)
         {
             this.transform.Translate(new Vector3(0f, moveSpeed, 0f)
@@ -68,12 +71,14 @@ public class FlyingPlayerMovement : MonoBehaviour
             this.transform.Translate(new Vector3(0f, moveSpeed * -1, 0f) * Time.deltaTime);
         }
 
+        //The following allows the player to boost and increase their speed, but only while flying.
         if (Input.GetKey(boost) && isFlying == true && isBoosting == false)
         {
             isBoosting = true;
             moveSpeed = boostSpeed;
         }
 
+        //The following manages the boosting function, causing energy to deplete faster while boosting and ending the boost after the time limit for it has been reached.
         if (isBoosting == true)
         {
             boostTimer += Time.deltaTime;
@@ -87,17 +92,20 @@ public class FlyingPlayerMovement : MonoBehaviour
             }
         }
 
+        //This following 'if' statement allows the player to start flying if press the jump button while already in the air.
         if (Input.GetButtonDown("Jump") && !isGrounded && canFly == true)
         {
             isFlying = true;
             rb.velocity = Vector2.zero;
         }
 
+        //The follow cancels the player's flight and allows them to recharge energy.
         if (Input.GetKey(cancelFlight))
         {
             isFlying = false;
         }
 
+        //The following two statements manage whether or not the player is able to initiate flight, based on whether to energy meter has been recently depleted or not.
         if (energy <=0)
         {
             canFly = false;
@@ -112,6 +120,7 @@ public class FlyingPlayerMovement : MonoBehaviour
         }
 
 
+        //The following two statements manage energy consumption for the player, depleting energy while flying and regenerating it while not flying.
         if (isFlying == true)
         {
             rb.gravityScale = 0.0f;

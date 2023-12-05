@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyShooting : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class EnemyShooting : MonoBehaviour
 
         float distance = Vector2.Distance(transform.position, player.transform.position);
 
+        //The following allows the enemy to shoot a bullet if the player is within a certain range of them, and if the enemy's ammo count is above 0.
         if (canShoot == true && distance < 10)
         {
             timer += Time.deltaTime;
@@ -42,6 +44,7 @@ public class EnemyShooting : MonoBehaviour
             }
         }
         
+        //The following sets a delay on the enemy's next shot and restores their ammo to full once this delay is over, allowing them to shoot again.
         if (canShoot == false)
             {
                 reloadTimer += Time.deltaTime;
@@ -52,12 +55,13 @@ public class EnemyShooting : MonoBehaviour
                 }
             }
         
-
+        //The following prevents the enemy from being able to shoot while their ammo is depleted.
         if (ammo <= 0)
         {
             canShoot = false;
         }
 
+        //The following allows the enemy to shoot once again after their ammo has been refilled.
         else
         {
             if (ammo >= maxAmmo)
