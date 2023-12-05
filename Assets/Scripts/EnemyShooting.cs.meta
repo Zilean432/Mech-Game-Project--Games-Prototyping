@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: f1492cc0066fa0f4baa77d2d702e6e0b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - turretBullet: {instanceID: 0}
+  - turretBulletPos: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
