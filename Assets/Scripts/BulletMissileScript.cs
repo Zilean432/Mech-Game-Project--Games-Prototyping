@@ -15,6 +15,7 @@ public class BulletMissileScript : MonoBehaviour
     public GameObject hitParticle;
     public GameObject explosion;
 
+    //This is the same code snippet present on all of the bullet types, makes the bullets move towards and be pointed at the direction of the mouse cursor.
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -64,6 +65,7 @@ public class BulletMissileScript : MonoBehaviour
             }
         }
 
+        //This code, combined with the destroy function in the 'update' section, allows the bullet to pass through and destroy a certain number of enemy bullets before it is destroyed itself.
         if (other.gameObject.tag == "EnemyBullet")
         {
             health -= 1;

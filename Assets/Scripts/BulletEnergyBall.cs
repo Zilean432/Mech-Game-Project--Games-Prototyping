@@ -16,6 +16,7 @@ public class BulletEnergyBall : MonoBehaviour
     private float hitCooldown;
     public GameObject hitParticle;
     
+    //This is the same code snippet present on all of the bullet types, makes the bullets move towards and be pointed at the direction of the mouse cursor.
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -33,8 +34,11 @@ public class BulletEnergyBall : MonoBehaviour
     void Update()
     {
         lifeTimer += Time.deltaTime;
+
+        //The following 2 lines allow the energy ball projectile to progressively grow bigger from it's starting size the longer it's alive.
         size = lifeTimer + baseSize;
         transform.localScale = new Vector3(size, size, 1f);
+
         if (lifeTimer >= 3)
         {
             Destroy(gameObject);
@@ -46,6 +50,7 @@ public class BulletEnergyBall : MonoBehaviour
         }
     }
 
+    //The following allows the energy ball projectile to deal damage multiple times to the same enemy, based on how long or short the hit cooldown 
     private void OnTriggerStay2D(Collider2D other) 
     {
         if (other.gameObject.tag == "Enemy" && hitCooldown >= 0.5)

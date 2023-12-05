@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankEnemyMovement : MonoBehaviour
+public class TankEnemyTimedMovement : MonoBehaviour
 {
     public float speed = 1f;
+    private float timer;
+    public float changeDirectionTime;
 
     // Start is called before the first frame update
     void Start()
@@ -12,21 +14,20 @@ public class TankEnemyMovement : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // The following causes the tank enemy to change their movement direction after a certain amount of time.
     void Update()
     {
         float deltaX = speed * Time.deltaTime;
         transform.Translate(deltaX, 0, 0);
-    }
 
-    //The following causes the tank enemy to change their movement direction when they hit a properly tagged wall.
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "EnemyPatrolBoundary")
+        timer += Time.deltaTime;
+        if (timer > changeDirectionTime)
         {
             speed = speed * -1;
+            timer = 0;
         }
 
-
     }
+
+
 }

@@ -21,8 +21,11 @@ public class BulletMissileExplosionScript : MonoBehaviour
     void Update()
     {
         lifeTimer += Time.deltaTime;
+
+        //The following 2 lines allow the explosion to progressively grow bigger from it's starting size the longer it's alive.
         size = (lifeTimer + baseSize) * 1.5f;
         transform.localScale = new Vector3(size, size, 1f);
+
         if (hitCooldown < 0.5)
         {
             hitCooldown += Time.deltaTime;
@@ -32,6 +35,7 @@ public class BulletMissileExplosionScript : MonoBehaviour
             Destroy(gameObject);
     }
 
+    //The following allows the explosion to deal damage multiple times to the same enemy, based on how long or short the hit cooldown 
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.tag == "Enemy" && hitCooldown >= 0.5)
